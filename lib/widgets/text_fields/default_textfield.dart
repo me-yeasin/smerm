@@ -6,17 +6,17 @@ import '../../utils/app_colors.dart';
 import '../../utils/app_string.dart';
 
 class DefaultTextfield extends StatelessWidget {
-  const DefaultTextfield({
-    super.key,
-    required this.hintText,
-    this.lebelText,
-    this.width = 500,
-    required this.onChange,
-    this.secureText,
-    this.textEditingController,
-    this.useAsButton = false,
-    this.onTapButton,
-  });
+  const DefaultTextfield(
+      {super.key,
+      required this.hintText,
+      this.lebelText,
+      this.width = 500,
+      required this.onChange,
+      this.secureText,
+      this.textEditingController,
+      this.useAsButton = false,
+      this.onTapButton,
+      this.suffixIcon});
   final String hintText;
   final String? lebelText;
   final double width;
@@ -25,6 +25,7 @@ class DefaultTextfield extends StatelessWidget {
   final TextEditingController? textEditingController;
   final bool? useAsButton;
   final VoidCallback? onTapButton;
+  final Icon? suffixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +57,7 @@ class DefaultTextfield extends StatelessWidget {
                 fontFamily: fontRaleway,
               ),
               decoration: InputDecoration(
+                suffixIcon: suffixIcon,
                 hintText: hintText,
                 isCollapsed: true,
                 contentPadding: const EdgeInsets.symmetric(

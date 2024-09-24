@@ -63,8 +63,9 @@ class MyApp extends StatelessWidget {
           ),
           // initialRoute: auth.isAuth?SignUp.routeName:HomePage.routeName,
           // home: auth.isAuth?HomePage():(width<920?LoginM():LogInPage()),
-          home: const HomePage(),
+          // home: const HomePage(),
           // home: LcReportScreenM(),
+          initialRoute: HomePage.routeName,
           routes: {
             SignUpM.routeName: (context) => const SignUpM(),
             LoginM.routeName: (context) => const LoginM(),

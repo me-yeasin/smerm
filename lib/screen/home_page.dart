@@ -29,8 +29,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool isHomePage = true;
   int selectedIndex = 0;
-  List pageList = [
-    const LcInfoPage(),
+
+  List homePageList = [
+    LcInfoPage(),
     const BankSellPage(),
     const CustomerSellPage(),
     const UnsoldItemListPage(),
@@ -43,56 +44,59 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Auth a = Provider.of<Auth>(context);
     a.isAuth ? Provider.of<Contents>(context).fetchAndPrintPosts() : null;
+    const isAuth = true;
     Design design = Provider.of<Design>(context);
     double width = MediaQuery.of(context).size.width;
-    return a.isAuth
+    PreferredSizeWidget appBar = AppBar(
+      toolbarHeight: 90.0,
+      backgroundColor: colorP500,
+      leading: const Padding(
+        padding: EdgeInsets.all(
+          8.0,
+        ),
+        child: CircleAvatar(
+          backgroundColor: colorPrimaryS300,
+        ),
+      ),
+      title: const Text(
+        "Auto-Mobile Manager",
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: colorPrimaryS300,
+        ),
+      ),
+      titleSpacing: 10.0,
+      actions: [
+        const CircleAvatar(
+          backgroundColor: Colors.greenAccent,
+          radius: 15.0,
+        ),
+        const SizedBox(
+          width: 15.0,
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: SvgPicture.asset(
+            "assets/icons/settiing.svg",
+            height: 27.0,
+          ),
+        ),
+        const SizedBox(
+          width: 15.0,
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: SvgPicture.asset(
+            "assets/icons/log-out.svg",
+            height: 23.0,
+          ),
+        ),
+      ],
+    );
+    design.setAppBarHeight = appBar.preferredSize.height;
+    return isAuth //! Change it to a.isAuth
         ? Scaffold(
-            appBar: AppBar(
-              toolbarHeight: 90.0,
-              backgroundColor: colorP500,
-              leading: const Padding(
-                padding: EdgeInsets.all(
-                  8.0,
-                ),
-                child: CircleAvatar(
-                  backgroundColor: colorPrimaryS300,
-                ),
-              ),
-              title: const Text(
-                "Auto-Mobile Manager",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: colorPrimaryS300,
-                ),
-              ),
-              titleSpacing: 10.0,
-              actions: [
-                const CircleAvatar(
-                  backgroundColor: Colors.greenAccent,
-                  radius: 15.0,
-                ),
-                const SizedBox(
-                  width: 15.0,
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: SvgPicture.asset(
-                    "assets/icons/settiing.svg",
-                    height: 27.0,
-                  ),
-                ),
-                const SizedBox(
-                  width: 15.0,
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: SvgPicture.asset(
-                    "assets/icons/log-out.svg",
-                    height: 23.0,
-                  ),
-                ),
-              ],
-            ),
+            appBar: appBar,
             body: Container(
               height: double.maxFinite,
               width: double.maxFinite,
@@ -105,7 +109,7 @@ class _HomePageState extends State<HomePage> {
               ),
               child: design.getIsHomePage
                   ? LandingPage()
-                  : pageList[selectedIndex],
+                  : homePageList[selectedIndex],
             ),
             floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
             floatingActionButton: FloatingActionButton(
@@ -124,7 +128,6 @@ class _HomePageState extends State<HomePage> {
         : (width < 920 ? const LoginM() : const LogInPage());
   }
 }
-
 
 
 
