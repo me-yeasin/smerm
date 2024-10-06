@@ -6,19 +6,27 @@ import '../../utils/app_colors.dart';
 import '../../utils/app_string.dart';
 
 class DefaultTextfield extends StatelessWidget {
-  const DefaultTextfield(
-      {super.key,
-      required this.hintText,
-      this.lebelText,
-      this.width = 500,
-      required this.onChange,
-      this.secureText,
-      this.textEditingController,
-      this.useAsButton = false,
-      this.onTapButton,
-      this.suffixIcon});
+  const DefaultTextfield({
+    super.key,
+    required this.hintText,
+    this.lebelText,
+    this.width = 500,
+    required this.onChange,
+    this.secureText,
+    this.textEditingController,
+    this.useAsButton = false,
+    this.onTapButton,
+    this.suffixIcon,
+    this.controller,
+    this.buttonBgColor,
+    this.buttonForegroundColor,
+    this.buttonPadding,
+    this.buttonIcon,
+    this.buttonText,
+    this.maxLine,
+  });
   final String hintText;
-  final String? lebelText;
+  final String? lebelText, buttonText;
   final double width;
   final Function(String) onChange;
   final bool? secureText;
@@ -26,6 +34,11 @@ class DefaultTextfield extends StatelessWidget {
   final bool? useAsButton;
   final VoidCallback? onTapButton;
   final Icon? suffixIcon;
+  final TextEditingController? controller;
+  final Color? buttonBgColor, buttonForegroundColor;
+  final double? buttonPadding;
+  final IconData? buttonIcon;
+  final int? maxLine;
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +61,13 @@ class DefaultTextfield extends StatelessWidget {
           SizedBox(
             width: width,
             child: TextField(
+              maxLines: maxLine,
+              controller: controller,
               obscureText: secureText ?? false,
               obscuringCharacter: "x",
               onChanged: onChange,
               style: const TextStyle(
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w400,
                 fontSize: 16.0,
                 fontFamily: fontRaleway,
               ),
@@ -70,29 +85,30 @@ class DefaultTextfield extends StatelessWidget {
                   color: colorPrimaryS300,
                 ),
                 border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(
-                      5.0,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(
+                        5.0,
+                      ),
                     ),
-                  ),
-                  borderSide: BorderSide(
-                    width: 1.0,
-                    strokeAlign: BorderSide.strokeAlignInside,
-                    color: colorPrimaryS400,
-                  ),
-                ),
+                    borderSide: BorderSide(
+                      color: Colors.green,
+                      width: 2.0,
+                    )),
               ),
             ),
           )
         else
           ElevatedButton(
             style: ButtonStyle(
+              overlayColor:
+                  WidgetStatePropertyAll(colorPrimaryS100.withOpacity(0.35)),
+              shadowColor: const WidgetStatePropertyAll(Colors.transparent),
               alignment: Alignment.center,
-              foregroundColor: const WidgetStatePropertyAll(
-                Colors.white,
+              foregroundColor: WidgetStatePropertyAll(
+                buttonForegroundColor,
               ),
-              backgroundColor: const WidgetStatePropertyAll(
-                Colors.black,
+              backgroundColor: WidgetStatePropertyAll(
+                buttonBgColor,
               ),
               minimumSize: const WidgetStatePropertyAll(
                 Size(
@@ -105,28 +121,31 @@ class DefaultTextfield extends StatelessWidget {
                   borderRadius: BorderRadius.circular(
                     5.0,
                   ),
+                  side: const BorderSide(
+                    width: 2,
+                    color: Colors.grey,
+                  ),
                 ),
               ),
-              padding: const WidgetStatePropertyAll(
-                EdgeInsets.zero,
+              padding: WidgetStatePropertyAll(
+                EdgeInsets.symmetric(
+                  horizontal: buttonPadding ?? 10.0,
+                ),
               ),
             ),
             onPressed: onTapButton,
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "More Details",
-                  style: TextStyle(
+                  buttonText ?? "Button",
+                  style: const TextStyle(
                     fontSize: 14.0,
                     fontWeight: FontWeight.normal,
                   ),
                 ),
-                SizedBox(
-                  width: 50.0,
-                ),
                 Icon(
-                  Icons.arrow_forward_rounded,
+                  buttonIcon,
                   size: 18.0,
                 )
               ],

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smerp/providers/design.dart';
+import 'package:smerp/widgets/lc_info-widgets/chassis_entry_dialog.dart';
 
 import '../../utils/app_colors.dart';
 
@@ -7,6 +10,7 @@ class ChassisTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Design designProvider = Provider.of<Design>(context, listen: false);
     return Column(
       children: [
         Row(
@@ -31,19 +35,24 @@ class ChassisTable extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              padding: const EdgeInsets.symmetric(
-                vertical: 11.0,
-                horizontal: 20.0,
-              ),
-              decoration: BoxDecoration(
-                  color: colorPrimaryS300,
-                  borderRadius: BorderRadius.circular(5.0)),
-              child: const Text(
-                "Add New +",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
+            InkWell(
+              onTap: () {
+                designProvider.showSimpleDialog(context, ChassisEntryDialog());
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 11.0,
+                  horizontal: 20.0,
+                ),
+                decoration: BoxDecoration(
+                    color: colorPrimaryS300,
+                    borderRadius: BorderRadius.circular(5.0)),
+                child: const Text(
+                  "Add New +",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
             ),

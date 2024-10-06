@@ -21,4 +21,9 @@ class Design extends ChangeNotifier {
   set setAppBarHeight(double val) {
     _appBarHeight = val;
   }
+
+  Future<void> showSimpleDialog(BuildContext context, Widget dialog) async {
+    return showDialog(
+        context: context, barrierDismissible: true, builder: (ctx) => dialog);
+  }
 }
