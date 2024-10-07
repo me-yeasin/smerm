@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:smerp/widgets/lc_info-widgets/lc_dialog.dart';
+
+import '../../providers/design.dart';
 
 class LcTable extends StatelessWidget {
   const LcTable({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Design designProvider = Provider.of<Design>(context, listen: false);
     return Column(
       children: [
         Container(
@@ -30,7 +35,13 @@ class LcTable extends StatelessWidget {
                   children: [
                     IconButton(onPressed: () {}, icon: const Icon(Icons.close)),
                     IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.edit_note)),
+                        onPressed: () {
+                          designProvider.showSimpleDialog(
+                            context,
+                            const LCDialog(),
+                          );
+                        },
+                        icon: const Icon(Icons.edit_note)),
                   ],
                 ),
               )

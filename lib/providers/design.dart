@@ -4,6 +4,8 @@ class Design extends ChangeNotifier {
   bool _isHomePage = true;
   bool _isLcDetailPage = false;
   double _appBarHeight = 0.0;
+  List<bool> chassisItemSelectedBoolList = List.generate(4, (index) => false);
+  bool showChassisNameForm = false;
 
   bool get getIsHomePage => _isHomePage;
   set setIsHomePage(bool val) {
@@ -25,5 +27,15 @@ class Design extends ChangeNotifier {
   Future<void> showSimpleDialog(BuildContext context, Widget dialog) async {
     return showDialog(
         context: context, barrierDismissible: true, builder: (ctx) => dialog);
+  }
+
+  void selectChassisItem(int index) {
+    chassisItemSelectedBoolList[index] = !chassisItemSelectedBoolList[index];
+    if (chassisItemSelectedBoolList[index]) {
+      showChassisNameForm = true;
+    } else {
+      showChassisNameForm = false;
+    }
+    notifyListeners();
   }
 }

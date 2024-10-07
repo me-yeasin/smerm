@@ -75,185 +75,198 @@ class ChassisEntryDialog extends StatelessWidget {
       children: [
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Expanded(
-              child: Column(
-                children: [
-                  for (int i = 0; i < colOneInputs.length - 2; i++)
-                    DefaultTextfield(
-                      controller: colOneTextController[i],
-                      hintText: colOneInputs[i],
-                      onChange: (val) {},
+            Flexible(
+              child: SizedBox(
+                width: 450.0,
+                child: Column(
+                  children: [
+                    for (int i = 0; i < colOneInputs.length - 2; i++)
+                      DefaultTextfield(
+                        controller: colOneTextController[i],
+                        hintText: colOneInputs[i],
+                        onChange: (val) {},
+                      ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: DefaultTextfield(
+                            controller:
+                                colOneTextController[colOneInputs.length - 2],
+                            hintText: colOneInputs[colOneInputs.length - 2],
+                            onChange: (val) {},
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10.0,
+                        ),
+                        Expanded(
+                          child: DefaultTextfield(
+                            controller:
+                                colOneTextController[colOneInputs.length - 1],
+                            hintText: colOneInputs[colOneInputs.length - 1],
+                            onChange: (val) {},
+                          ),
+                        ),
+                      ],
                     ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: DefaultTextfield(
-                          controller:
-                              colOneTextController[colOneInputs.length - 2],
-                          hintText: colOneInputs[colOneInputs.length - 2],
-                          onChange: (val) {},
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10.0,
-                      ),
-                      Expanded(
-                        child: DefaultTextfield(
-                          controller:
-                              colOneTextController[colOneInputs.length - 1],
-                          hintText: colOneInputs[colOneInputs.length - 1],
-                          onChange: (val) {},
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             const SizedBox(
               width: 15.0,
             ),
-            Expanded(
-              child: Column(
-                children: [
-                  for (int i = 0; i < colTwoInputs.length - 2; i++)
-                    if (colTwoInputs[i] == "Landing Date")
-                      DefaultTextfield(
-                        hintText: "Landing Date",
-                        onChange: (val) {},
-                        useAsButton: true,
-                        buttonBgColor: Colors.transparent,
-                        buttonForegroundColor: colorPrimaryS300,
-                        buttonIcon: Icons.date_range_outlined,
-                        buttonText: "Landing Date",
-                        onTapButton: () async {
-                          final DateTime? picked = await showDatePicker(
-                            context: context,
-                            firstDate: DateTime(2021),
-                            lastDate: DateTime.now(),
-                            initialEntryMode: DatePickerEntryMode.calendarOnly,
-                            initialDate: DateTime.now(),
-                          );
-                        },
-                      )
-                    else if (colTwoInputs[i] == "Invoice")
-                      Row(
-                        children: [
-                          for (int j = 0; j < 3; j++)
-                            if (i + j < colTwoInputs.length)
-                              Expanded(
-                                child: DefaultTextfield(
-                                  hintText: colTwoInputs[i + j],
-                                  controller: colTwoTextController[i + j],
-                                  onChange: (val) {},
-                                ),
-                              ),
-                        ],
-                      )
-                    else if (colTwoInputs[i] == "Invoice Rate" ||
-                        colTwoInputs[i] == "Invoice BDT")
-                      Container()
-                    else
-                      DefaultTextfield(
-                        controller: colTwoTextController[i],
-                        hintText: colTwoInputs[i],
-                        onChange: (val) {},
-                      ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: DefaultTextfield(
-                            controller:
-                                colTwoTextController[colTwoInputs.length - 2],
-                            hintText: colTwoInputs[colTwoInputs.length - 2],
-                            onChange: (val) {}),
-                      ),
-                      Expanded(
-                        child: DefaultTextfield(
-                            controller:
-                                colTwoTextController[colTwoInputs.length - 1],
-                            hintText: colTwoInputs[colTwoInputs.length - 1],
-                            onChange: (val) {}),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              width: 15.0,
-            ),
-            Expanded(
-              child: Column(
-                children: [
-                  for (int i = 0; i < colThreeInputs.length; i++)
-                    if (colThreeInputs[i] == "VAT")
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Flexible(
+              child: SizedBox(
+                width: 450.0,
+                child: Column(
+                  children: [
+                    for (int i = 0; i < colTwoInputs.length - 2; i++)
+                      if (colTwoInputs[i] == "Landing Date")
+                        DefaultTextfield(
+                          hintText: "Landing Date",
+                          onChange: (val) {},
+                          useAsButton: true,
+                          buttonBgColor: Colors.transparent,
+                          buttonForegroundColor: colorPrimaryS300,
+                          buttonIcon: Icons.date_range_outlined,
+                          buttonText: "Landing Date",
+                          onTapButton: () async {
+                            final DateTime? picked = await showDatePicker(
+                              context: context,
+                              firstDate: DateTime(2021),
+                              lastDate: DateTime.now(),
+                              initialEntryMode:
+                                  DatePickerEntryMode.calendarOnly,
+                              initialDate: DateTime.now(),
+                            );
+                          },
+                        )
+                      else if (colTwoInputs[i] == "Invoice")
+                        Row(
                           children: [
-                            DropdownMenu(
-                                width: 170.0,
-                                trailingIcon: const Icon(
-                                    Icons.keyboard_arrow_down_rounded),
-                                selectedTrailingIcon:
-                                    const Icon(Icons.keyboard_arrow_up_rounded),
-                                initialSelection: "VAT",
-                                dropdownMenuEntries: [
-                                  "VAT",
-                                  "Not Given",
-                                  "Unsold"
-                                ].map<DropdownMenuEntry<String>>((any) {
-                                  return DropdownMenuEntry(
-                                      value: any, label: any);
-                                }).toList()),
-                            DropdownMenu(
-                                width: 170.0,
-                                trailingIcon: const Icon(
-                                    Icons.keyboard_arrow_down_rounded),
-                                selectedTrailingIcon:
-                                    const Icon(Icons.keyboard_arrow_up_rounded),
-                                initialSelection: "Sold",
-                                dropdownMenuEntries: [
-                                  "Sold",
-                                  "Not Given",
-                                  "Unsold"
-                                ].map<DropdownMenuEntry<String>>((any) {
-                                  return DropdownMenuEntry(
-                                      value: any, label: any);
-                                }).toList()),
-                          ],
-                        ),
-                      )
-                    else if (colThreeInputs[i] == "Sold")
-                      Container()
-                    else if (colThreeInputs[i] == "TT")
-                      Row(
-                        children: [
-                          for (int j = 0; j < 3; j++)
-                            if (i + j < colTwoInputs.length)
-                              Expanded(
-                                child: DefaultTextfield(
-                                  hintText: colThreeInputs[i + j],
-                                  controller: colThreeTextController[i + j],
-                                  onChange: (val) {},
+                            for (int j = 0; j < 3; j++)
+                              if (i + j < colTwoInputs.length)
+                                Expanded(
+                                  child: DefaultTextfield(
+                                    hintText: colTwoInputs[i + j],
+                                    controller: colTwoTextController[i + j],
+                                    onChange: (val) {},
+                                  ),
                                 ),
-                              ),
-                        ],
-                      )
-                    else if (colThreeInputs[i] == "TT Rate" ||
-                        colThreeInputs[i] == "TT BDT")
-                      Container()
-                    else
-                      DefaultTextfield(
-                        controller: colThreeTextController[i],
-                        hintText: colThreeInputs[i],
-                        onChange: (val) {},
-                      )
-                ],
+                          ],
+                        )
+                      else if (colTwoInputs[i] == "Invoice Rate" ||
+                          colTwoInputs[i] == "Invoice BDT")
+                        Container()
+                      else
+                        DefaultTextfield(
+                          controller: colTwoTextController[i],
+                          hintText: colTwoInputs[i],
+                          onChange: (val) {},
+                        ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: DefaultTextfield(
+                              controller:
+                                  colTwoTextController[colTwoInputs.length - 2],
+                              hintText: colTwoInputs[colTwoInputs.length - 2],
+                              onChange: (val) {}),
+                        ),
+                        Expanded(
+                          child: DefaultTextfield(
+                              controller:
+                                  colTwoTextController[colTwoInputs.length - 1],
+                              hintText: colTwoInputs[colTwoInputs.length - 1],
+                              onChange: (val) {}),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              width: 15.0,
+            ),
+            Flexible(
+              child: SizedBox(
+                width: 450.0,
+                child: Column(
+                  children: [
+                    for (int i = 0; i < colThreeInputs.length; i++)
+                      if (colThreeInputs[i] == "VAT")
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              DropdownMenu(
+                                  width: 170.0,
+                                  trailingIcon: const Icon(
+                                      Icons.keyboard_arrow_down_rounded),
+                                  selectedTrailingIcon: const Icon(
+                                      Icons.keyboard_arrow_up_rounded),
+                                  initialSelection: "VAT",
+                                  dropdownMenuEntries: [
+                                    "VAT",
+                                    "Not Given",
+                                    "Unsold"
+                                  ].map<DropdownMenuEntry<String>>((any) {
+                                    return DropdownMenuEntry(
+                                        value: any, label: any);
+                                  }).toList()),
+                              DropdownMenu(
+                                  width: 170.0,
+                                  trailingIcon: const Icon(
+                                      Icons.keyboard_arrow_down_rounded),
+                                  selectedTrailingIcon: const Icon(
+                                      Icons.keyboard_arrow_up_rounded),
+                                  initialSelection: "Sold",
+                                  dropdownMenuEntries: [
+                                    "Sold",
+                                    "Not Given",
+                                    "Unsold"
+                                  ].map<DropdownMenuEntry<String>>((any) {
+                                    return DropdownMenuEntry(
+                                        value: any, label: any);
+                                  }).toList()),
+                            ],
+                          ),
+                        )
+                      else if (colThreeInputs[i] == "Sold")
+                        Container()
+                      else if (colThreeInputs[i] == "TT")
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            for (int j = 0; j < 3; j++)
+                              if (i + j < colTwoInputs.length)
+                                Flexible(
+                                  child: DefaultTextfield(
+                                    width: 160.0,
+                                    hintText: colThreeInputs[i + j],
+                                    controller: colThreeTextController[i + j],
+                                    onChange: (val) {},
+                                  ),
+                                ),
+                          ],
+                        )
+                      else if (colThreeInputs[i] == "TT Rate" ||
+                          colThreeInputs[i] == "TT BDT")
+                        Container()
+                      else
+                        DefaultTextfield(
+                          controller: colThreeTextController[i],
+                          hintText: colThreeInputs[i],
+                          onChange: (val) {},
+                        )
+                  ],
+                ),
               ),
             ),
           ],

@@ -137,11 +137,11 @@ class LcInfoPage extends StatelessWidget {
                     SizedBox(
                       width: screenSize.width * (0.75 - 0.15),
                       height: bodySize,
-                      child: const SingleChildScrollView(
+                      child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            LcTable(),
-                            SizedBox(
+                            const LcTable(),
+                            const SizedBox(
                               height: 50.0,
                             ),
                             ChassisTable(),
